@@ -15,4 +15,4 @@ DATABASES = {
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['*']
