@@ -7,3 +7,4 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
+DEBUG = False
