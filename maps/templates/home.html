@@ -16,40 +16,52 @@
 <div id="map"></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9ueW9ua2EiLCJhIjoiY2sxbTF1cjlrMDdkdTNpcDZyNmQ3eG9xeCJ9.GwSPf8q-E9jtvrRrVPgksg';
-var collections = []
-var longLat = "{{longlat}}"
+var featureCollection = [];
+var longLat = JSON.parse("{{longlat}}")
+for(var itemIndex in longLat) {
+  // push new feature to the collection
+  featureCollection.push({
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": longLat[itemIndex]
+    }
+  });
+}
+console.log(typeof(longLat))
 var map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/outdoors-v11",
     center: [37.9062, -0.0236],
     zoom: 6
 });
-console.log(longLat)
+
 
 map.on("load", function() {
     map.addSource("national-park", {
         "type": "geojson",
         "data": {
             "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [36.810248333333334, -1.1693616666666666]
-                }
-            }, {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [36.8233, -1.2884]
-                }
-            }, {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [36.8032, -1.2572]
-                }
-            }]
+            "features": featureCollection
+            // [{
+            //     "type": "Feature",
+            //     "geometry": {
+            //         "type": "Point",
+            //         "coordinates": [36.810248333333334, -1.1693616666666666]
+            //     }
+            // }, {
+            //     "type": "Feature",
+            //     "geometry": {
+            //         "type": "Point",
+            //         "coordinates": [36.8233, -1.2884]
+            //     }
+            // }, {
+            //     "type": "Feature",
+            //     "geometry": {
+            //         "type": "Point",
+            //         "coordinates": [36.8032, -1.2572]
+            //     }
+            // }]
         }
     });
 
@@ -58,7 +70,7 @@ map.on("load", function() {
         "type": "circle",
         "source": "national-park",
         "paint": {
-            "circle-radius": 6,
+            "circle-radius": 4,
             "circle-color": "#B42222"
         },
         "filter": ["==", "$type", "Point"],
