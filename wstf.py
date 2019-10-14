@@ -30,6 +30,12 @@ def LongLat():
         longlat.append([float(i) for i in loc])
     return longlat
 # print(LongLat())
+def project():
+    projo = []
+    for i in everything:
+        projo.append(i.get('project'))
+    return projo
+# print(project())
 
     
 # print(len(lng))
