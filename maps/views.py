@@ -11,9 +11,4 @@ def default_map(request):
 
 def home_map(request):
     longlat = LongLat()
-    project = project()
-    context = {
-        'longlat':longlat,
-        'project':project
-    }
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', {'longlat':longlat})
