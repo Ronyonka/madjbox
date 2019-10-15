@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from decouple import config
 from madjbox.settings.base import ACCESS_TOKEN
-from wstf import *
+from wstf import LongLat, projo1
 
 
 def default_map(request):
@@ -11,4 +11,5 @@ def default_map(request):
 
 def home_map(request):
     longlat = LongLat()
-    return render(request, 'home.html', {'longlat':longlat})
+    projo = projo1()
+    return render(request, 'home.html', {'longlat':longlat, 'projo':projo})

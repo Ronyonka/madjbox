@@ -23,13 +23,15 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9ueW9ua2EiLCJhIjoiY2sxbTF1cjlrMDdkdTNpcDZyNmQ3eG9xeCJ9.GwSPf8q-E9jtvrRrVPgksg';
 var featureCollection = [];
 var longLat = JSON.parse("{{longlat}}")
+var s = JSON.parse(JSON.stringify("{{projo}}"));
+// console.log(s)
 for(var itemIndex in longLat) {
   // push new feature to the collection
   featureCollection.push({
     "type": "Feature",
     "properties": {
         "title": "Humboldt Park",
-        "description": "A large park on Chicago's northwest side"
+        "description": longLat[itemIndex]
       },
     "geometry": {
       "type": "Point",
@@ -37,7 +39,7 @@ for(var itemIndex in longLat) {
     }
   });
 }
-console.log(typeof(longLat))
+// console.log(typeof(longLat))
 var map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
@@ -47,7 +49,7 @@ var map = new mapboxgl.Map({
 
 
 map.on("load", function() {
-    map.addSource("national-park", {
+    map.addSource("places", {
         "type": "geojson",
         "data": {
             "type": "FeatureCollection",
@@ -77,12 +79,38 @@ map.on("load", function() {
     map.addLayer({
         "id": "places",
         "type": "circle",
-        "source": "national-park",
+        "source": "places",
         "paint": {
             "circle-radius": 4,
             "circle-color": "#B42222"
         },
         "filter": ["==", "$type", "Point"],
+    });
+    map.on('click', 'places', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+         
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+         
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+        });
+         
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', function () {
+        map.getCanvas().style.cursor = 'pointer';
+        });
+         
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', function () {
+        map.getCanvas().style.cursor = '';
     });
 });
 // Add zoom and rotation controls to the map.
