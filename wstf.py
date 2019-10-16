@@ -35,6 +35,12 @@ def projo1():
     for i in everything:
         projo.append(str(i.get('project')))
     return projo
+
+def get_pictures():
+    pictures= []
+    for i in everything:
+        pictures.append(str(i.get('investment_exists_group/Facility_picture')))
+    return pictures
 # print(type(projo1()))
 # print(projo1())
 
