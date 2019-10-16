@@ -23,15 +23,17 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9ueW9ua2EiLCJhIjoiY2sxbTF1cjlrMDdkdTNpcDZyNmQ3eG9xeCJ9.GwSPf8q-E9jtvrRrVPgksg';
 var featureCollection = [];
 var longLat = JSON.parse("{{longlat}}")
-var s = JSON.parse(JSON.stringify("{{projo}}"));
+var s = {{projoc | safe}};
 // console.log(s)
+// console.log(typeof("{{longlat}}"))
+// console.log(typeof({{projoc | safe}}))
 for(var itemIndex in longLat) {
   // push new feature to the collection
   featureCollection.push({
     "type": "Feature",
     "properties": {
         "title": "Humboldt Park",
-        "description": longLat[itemIndex]
+        "description": "<h3>Project:</h3><h1>"+s[itemIndex]+"</h1"
       },
     "geometry": {
       "type": "Point",
@@ -82,7 +84,8 @@ map.on("load", function() {
         "source": "places",
         "paint": {
             "circle-radius": 4,
-            "circle-color": "#B42222"
+            "circle-color": "#B42222",
+            "circle-stroke-width": 1,
         },
         "filter": ["==", "$type", "Point"],
     });

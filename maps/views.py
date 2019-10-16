@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from decouple import config
 from madjbox.settings.base import ACCESS_TOKEN
@@ -12,4 +13,5 @@ def default_map(request):
 def home_map(request):
     longlat = LongLat()
     projo = projo1()
-    return render(request, 'home.html', {'longlat':longlat, 'projo':projo})
+    json_projects = json.dumps(projo1())
+    return render(request, 'home.html', {'longlat':longlat, 'projo':projo, 'projoc':json_projects})

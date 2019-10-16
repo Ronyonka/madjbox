@@ -17,3 +17,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'madjbox.settings.dev')
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
+

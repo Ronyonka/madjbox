@@ -33,8 +33,9 @@ def LongLat():
 def projo1():
     projo = []
     for i in everything:
-        projo.append(i.get('project'))
+        projo.append(str(i.get('project')))
     return projo
+# print(type(projo1()))
 # print(projo1())
 
     
