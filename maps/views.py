@@ -13,7 +13,7 @@ def default_map(request):
 def home_map(request):
     longlat = LongLat()
     projo = projo1()
-    mapbox_token = ACCESS_TOKEN
+    mapbox_token = json.dumps(ACCESS_TOKEN)
     json_projects = json.dumps(projo1())
     return render(request, 'home.html', {'longlat':longlat, 'projo':projo, 'projoc':json_projects, 'mapbox_token':mapbox_token})
 
