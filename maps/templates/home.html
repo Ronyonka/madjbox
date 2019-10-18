@@ -20,7 +20,8 @@
         </style>
 <div id="map"></div>
 <script>
-mapboxgl.accessToken = 'pk.eyJ1Ijoicm9ueW9ua2EiLCJhIjoiY2sxbTF1cjlrMDdkdTNpcDZyNmQ3eG9xeCJ9.GwSPf8q-E9jtvrRrVPgksg';
+mapboxgl.accessToken = "{{mapbox_token}}";
+console.log("{{mapbox_token}}")
 var featureCollection = [];
 var longLat = JSON.parse("{{longlat}}")
 var s = {{projoc | safe}};
