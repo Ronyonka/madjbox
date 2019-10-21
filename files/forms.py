@@ -7,5 +7,5 @@ class UploadFileForm(forms.Form):
     uploaded_file = forms.FileField()
 
     class Meta:
-        model = File
+        model = Files
         fields = ('name','uploaded_file',)
