@@ -2,7 +2,7 @@ from django import forms
 from .models import Files
 
 
-class UploadFileForm(forms.Form):
+class UploadFileForm(forms.ModelForm):
     name = forms.CharField(max_length=50)
     uploaded_file = forms.FileField()
 
