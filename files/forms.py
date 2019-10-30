@@ -9,3 +9,6 @@ class UploadFileForm(forms.ModelForm):
     class Meta:
         model = Files
         fields = ('name','uploaded_file',)
+        
+class FileUploadForm(forms.Form):
+    file_source = forms.FileField()

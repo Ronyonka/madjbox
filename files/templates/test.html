@@ -1,7 +1,30 @@
+{% extends 'base.html' %}
 {% block content %}
-<form method="post">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <button type="submit" name="run_script">Run script</button>
+    {{ form }}
+    <button type="submit" id="submit" name="run_script">Run script</button>
 </form>
 
 {% endblock %}
+<!-- {% block custom_js %}
+<script>
+    var postUrl = "{% url 'test_view' %}";
+    $(function () {
+         $('#submit').on('click', function (e) {
+            var file = $('#file').val()
+            console.log(radioValue)
+            $.ajax({
+                url: postUrl,
+                method: 'POST',
+                data: {
+                    fi : file
+                },
+                headers: {
+                    'X-CSRFToken': '{{csrf_token}}'
+                }
+            })
+    })
+    })
+</script>
+{% endblock custom_js %} -->

@@ -26,7 +26,7 @@ auth_client = APIKeyAuthClient(
 def upload_dataset(auth_client, LOCAL_FILE_OR_URL):
     dataset_manager = DatasetManager(auth_client)
     dataset = dataset_manager.create(LOCAL_FILE_OR_URL)
-    print('-------------------------------this-------------------------------------')
+    print('-------------------------------file uploaded-------------------------------------')
 
 
 # upload_dataset(auth_client, LOCAL_FILE_OR_URL)
